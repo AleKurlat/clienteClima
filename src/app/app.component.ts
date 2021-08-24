@@ -23,7 +23,6 @@ export class AppComponent {
     this.climaService.getClima(reqBody)
       .subscribe((clima: TipoClima) => {
         this.clima = clima;
-        console.log(clima)
       });
   }
 

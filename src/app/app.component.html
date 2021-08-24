@@ -1,5 +1,6 @@
 <div *ngIf="clima">
     <div>Ciudad: {{clima.name}}</div>
+    <div>País: {{clima.sys.country}}</div>
     <div>Temperatura actual: {{ clima.main.temp }}</div>
     <div>Sensación térmica actual: {{ clima.main.feels_like }}</div>
 </div>
