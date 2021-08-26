@@ -9,7 +9,7 @@ import { TipoClima } from './tipoClima'
 })
 export class ClimaService {
 
-  private url = 'http://localhost:3001/';
+  private url = 'http://localhost:3001/api/registro_clima';
 
   constructor(private http: HttpClient,) { }
 

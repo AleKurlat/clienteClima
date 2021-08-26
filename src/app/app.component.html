@@ -1,9 +1,37 @@
+<form *ngIf="ciudades" action="">
+    <select name="" id="" [formControl]="formCiudad">
+        <option disabled value=null>Seleccione la ciudad</option>
+        <option *ngFor="let ciudad of ciudades">{{ciudad}}</option>
+    </select>
+
+    <label for="ciudad">Ciudad:</label>
+    <input type="text" id="ciudad" placeholder="Nombre de ciudad" [formControl]="formNombre">
+
+    <input type="checkbox" id="historial" name="historial" [formControl]="checkHistorial">
+    <label for="historial">Incluir histórico</label>
+
+    <button type="button" (click)="getClima()">Consultar</button>
+</form>
+
 <div *ngIf="clima">
-    <div>Ciudad: {{clima.name}}</div>
-    <div>País: {{clima.sys.country}}</div>
+    <div>Ciudad: {{clima.name}}, {{clima.sys.country}}</div>
     <div>Temperatura actual: {{ clima.main.temp }}</div>
     <div>Sensación térmica actual: {{ clima.main.feels_like }}</div>
 </div>
-<label for="city">Ciudad:</label>
-<input type="text" id="city" placeholder="Nombre de ciudad" [formControl]="formNombre">
-<button (click)="getClima(formNombre.value)">Botón</button>
+
+<table *ngIf="historial">
+    <tbody>
+        <tr>
+            <th>País</th>
+            <th>Ciudad</th>
+            <th>Temperatura</th>
+            <th>Sensación térmica</th>
+        </tr>
+        <tr *ngFor=" let fila of historial">
+            <td>{{ fila.registro.sys.country}}</td>
+            <td>{{ fila.registro.name}}</td>
+            <td>{{ fila.registro.main.temp}}</td>
+            <td>{{ fila.registro.main.feels_like }}</td>
+        </tr>
+    </tbody>
+</table>
