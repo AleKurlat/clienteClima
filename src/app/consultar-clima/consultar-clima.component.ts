@@ -17,6 +17,7 @@ export class ConsultarClimaComponent implements OnInit {
   @Input() ciudades?: Array<TipoCiudad>;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
+  isLoading = true;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
 

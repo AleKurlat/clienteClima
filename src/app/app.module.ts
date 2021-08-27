@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ConfigurarCiudadesComponent } from './configurar-ciudades/configurar-ciudades.component';
 import { ConsultarClimaComponent } from './consultar-clima/consultar-clima.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ConsultarClimaComponent } from './consultar-clima/consultar-clima.compo
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

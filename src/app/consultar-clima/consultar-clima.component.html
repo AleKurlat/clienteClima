@@ -7,16 +7,18 @@
     <input type="checkbox" id="historial" name="historial" [formControl]="checkHistorial">
     <label for="historial">Incluir histórico</label>
 
-    <button type="button" (click)="getClima()">Consultar</button>
+    <button class="btn" type="button" (click)="getClima()">Consultar</button>
 </form>
-
+<div *ngIf="isLoading">
+    <img src="assets/img/loading.svg">
+</div>
 <div *ngIf="clima">
     <div>Ciudad: {{clima.name}}, {{clima.sys.country}}</div>
     <div>Temperatura actual: {{ clima.main.temp }}</div>
     <div>Sensación térmica actual: {{ clima.main.feels_like }}</div>
 </div>
 
-<table *ngIf="historial">
+<table class="table table-striped" *ngIf="historial">
     <tbody>
         <tr>
             <th>País</th>
