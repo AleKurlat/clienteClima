@@ -2,9 +2,25 @@
 body {
     display: flex;
       justify-content: center;
+      margin: 15px;
   }
 
   .loader{
     margin:auto;
     display: block;
+  }
+
+  button {
+    margin-bottom: 5px;
+    margin-top:5px
+  }
+
+  .formConsultar{
+    display: flex;
+    justify-content: flex-start;   
+     align-items: baseline;
+}
+
+.formConsultar > *{
+  margin-right: 20px;
   }

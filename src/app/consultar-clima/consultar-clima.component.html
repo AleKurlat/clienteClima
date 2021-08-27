@@ -1,22 +1,23 @@
-<div>
-    <form *ngIf="ciudades">
+<div class="consultar-clima">
+    <form *ngIf="ciudades" class="formConsultar">
         <select name="" id="" [formControl]="formCiudad">
             <option disabled value=null>Seleccione la ciudad</option>
             <option *ngFor="let ciudad of ciudades">{{ciudad.ciudad}}</option>
         </select>
 
-        <input type="checkbox" id="historial" name="historial" [formControl]="checkHistorial">
-        <label for="historial">Incluir histórico</label>
+        <span>
+            <input type="checkbox" id="historial" name="historial" [formControl]="checkHistorial">
+            <label for="historial">Incluir histórico</label>
+        </span>
 
-        <button class="btn" type="button" (click)="getClima()">Consultar</button>
+        <button class="btn btn-primary" type="button" (click)="getClima()">Consultar</button>
     </form>
     <div *ngIf="isLoading">
         <img class="loader" src="assets/img/loading.svg">
     </div>
-    <div *ngIf="clima">
+    <div class="panelInformacion" *ngIf="clima">
         <div>Ciudad: {{clima.name}}, {{clima.sys.country}}</div>
-        <div>Temperatura actual: {{ clima.main.temp }}</div>
-        <div>Sensación térmica actual: {{ clima.main.feels_like }}</div>
+        <div> Temperatura: {{ clima.main.temp }} Sensación térmica: {{ clima.main.feels_like }}</div>
     </div>
 
     <table class="table table-striped" *ngIf="historial">

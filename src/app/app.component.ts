@@ -11,11 +11,16 @@ import { TipoCiudad } from './tipos';
 export class AppComponent {
   title = 'consultar-clima';
   ciudades?: Array<TipoCiudad>;
+  panelConfigurar = false;
 
   constructor(private ciudadesService: CiudadesService) { }
 
   ngOnInit() {
     this.traerCiudades();
+  }
+
+  toggleConfigurar() {
+    this.panelConfigurar = !this.panelConfigurar
   }
 
   traerCiudades() {

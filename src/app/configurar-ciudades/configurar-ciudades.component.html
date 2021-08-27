@@ -1,11 +1,16 @@
-<form>
-    <label for="ciudad">Ciudad:</label>
-    <input type="text" id="ciudad" placeholder="Nombre de ciudad" [formControl]="formNombre">
-    <button type="button" (click)="agregarCiudad(formNombre.value)">Agregar ciudad</button>
-</form>
-<div *ngIf="ciudades">
-    <div *ngFor="let ciudad of ciudades">
-        {{ciudad.ciudad}}
-        <button type="button" (click)="borrarCiudad(ciudad.id)">Borrar ciudad</button>
+<div class="contenedor-configurar">
+    <form class="formConsultar">
+        <span>
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" placeholder="Nombre de ciudad" [formControl]="formNombre">
+        </span>
+        <button type="button" class="btn btn-primary" (click)="agregarCiudad(formNombre.value)">Agregar ciudad</button>
+    </form>
+
+    <div *ngIf="ciudades">
+        <div *ngFor="let ciudad of ciudades">
+            {{ciudad.ciudad}}
+            <button class="btn btn-primary" type="button" (click)="borrarCiudad(ciudad.id)">Borrar ciudad</button>
+        </div>
     </div>
 </div>
