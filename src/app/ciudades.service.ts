@@ -10,10 +10,11 @@ import { TipoCiudades, TipoCiudad, TipoClima } from './tipos';
 })
 export class CiudadesService {
   private url = environment.APIEndpoint + '/api/ciudades';
+
   constructor(private http: HttpClient,) { }
 
   //chequear tipo
-  getCiudades(): Observable<any> {
+  traerCiudades(): Observable<any> {
     return this.http.get
       (this.url)
   }

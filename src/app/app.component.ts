@@ -15,11 +15,11 @@ export class AppComponent {
   constructor(private ciudadesService: CiudadesService) { }
 
   ngOnInit() {
-    this.getCiudades();
+    this.traerCiudades();
   }
 
-  getCiudades() {
-    this.ciudadesService.getCiudades()
+  traerCiudades() {
+    this.ciudadesService.traerCiudades()
       .subscribe((ciudades: Array<TipoCiudad>) => {
         this.ciudades = ciudades;
       });
