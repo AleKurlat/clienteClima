@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { ClimaService } from './clima.service';
-import { CiudadesService } from './ciudades.service';
+import { Component, OnInit } from '@angular/core';
+import { ClimaService } from '../clima.service';
+import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
-import { TipoClima, TipoCiudad, TipoHistorial } from './tipos';
+import { TipoClima, TipoCiudad, TipoHistorial } from '../tipos';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-consultar-clima',
+  templateUrl: './consultar-clima.component.html',
+  styleUrls: ['./consultar-clima.component.css']
 })
+export class ConsultarClimaComponent implements OnInit {
 
-export class AppComponent {
   title = 'consultar-clima';
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
@@ -44,4 +44,6 @@ export class AppComponent {
         this.historial = hayHistorial ? clima : null;
       });
   }
+
+
 }

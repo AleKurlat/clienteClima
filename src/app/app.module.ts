@@ -5,10 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
+import { ConfigurarCiudadesComponent } from './configurar-ciudades/configurar-ciudades.component';
+import { ConsultarClimaComponent } from './consultar-clima/consultar-clima.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfigurarCiudadesComponent,
+    ConsultarClimaComponent
   ],
   imports: [
     BrowserModule,
