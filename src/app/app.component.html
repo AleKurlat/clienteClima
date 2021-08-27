@@ -1,6 +1,8 @@
-<h1>Consulta de clima</h1>
 <div>
-    <app-consultar-clima *ngIf="ciudades" [ciudades]="ciudades"></app-consultar-clima>
-    <app-configurar-ciudades [ciudades]="ciudades" (actualizarCiudades)="traerCiudades()">
-    </app-configurar-ciudades>
+    <h1>Consulta de clima</h1>
+    <div>
+        <app-consultar-clima *ngIf="ciudades" [ciudades]="ciudades"></app-consultar-clima>
+        <app-configurar-ciudades [ciudades]="ciudades" (actualizarCiudades)="traerCiudades()">
+        </app-configurar-ciudades>
+    </div>
 </div>

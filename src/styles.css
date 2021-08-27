@@ -3,3 +3,8 @@ body {
     display: flex;
       justify-content: center;
   }
+
+  .loader{
+    margin:auto;
+    display: block;
+  }

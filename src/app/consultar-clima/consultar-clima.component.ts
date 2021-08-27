@@ -17,7 +17,7 @@ export class ConsultarClimaComponent implements OnInit {
   @Input() ciudades?: Array<TipoCiudad>;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
-  isLoading = true;
+  isLoading = false;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
 
@@ -28,12 +28,12 @@ export class ConsultarClimaComponent implements OnInit {
     const hayHistorial = this.checkHistorial.value
     const cantFilasHistorial = hayHistorial ? 10 : 0; // si la casilla tiene check entonces devuelve 10 registros, sino no devuelve historial 
     const reqBody = { "ciudad": ciudad, "cantFilasHistorial": cantFilasHistorial }
-    console.log("esperando respuesta del servidor") // cambiar por preloader
-
+    this.isLoading = true;
     this.climaService.getClima(reqBody)
       .subscribe((clima: any) => {
         this.clima = hayHistorial ? clima[0].registro : clima; // si se solicitó historial, se muestra en primer lugar la consulta recién realizada
         this.historial = hayHistorial ? clima : null;
+        this.isLoading = false;
       });
   }
 
