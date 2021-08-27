@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CiudadesService } from '../ciudades.service';
 import { TipoCiudad } from '../tipos';
@@ -10,6 +10,7 @@ import { TipoCiudad } from '../tipos';
 })
 export class ConfigurarCiudadesComponent implements OnInit {
   @Input() ciudades?: Array<TipoCiudad>;
+  @Output() actualizarCiudades = new EventEmitter<void>();
   formNombre = new FormControl('');
 
   constructor(private ciudadesService: CiudadesService) { }
@@ -19,8 +20,8 @@ export class ConfigurarCiudadesComponent implements OnInit {
   borrarCiudad(id: number) {
     this.ciudadesService.borrarCiudad(id)
       .subscribe(() => {
-        console.log(id + " borrado correctamente");
-        //this.getCiudades()
+        this.actualizarCiudades.emit();
+        console.log(id + " borrado correctamente")
       });
   }
 
@@ -28,9 +29,11 @@ export class ConfigurarCiudadesComponent implements OnInit {
     const reqBody = { "ciudad": ciudad }
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
-        console.log(ciudad + " agregada correctamente");
-        //this.getCiudades()
+        this.actualizarCiudades.emit();
+        console.log(ciudad + " agregada correctamente")
       });
   }
+
+
 
 }
