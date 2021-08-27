@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClimaService } from '../clima.service';
 import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
@@ -14,22 +14,13 @@ export class ConsultarClimaComponent implements OnInit {
   title = 'consultar-clima';
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
-  ciudades?: Array<TipoCiudad>;
+  @Input() ciudades?: Array<TipoCiudad>;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
 
-  ngOnInit() {
-    this.getCiudades();
-  }
-
-  getCiudades() {
-    this.ciudadesService.getCiudades()
-      .subscribe((ciudades: Array<TipoCiudad>) => {
-        this.ciudades = ciudades;
-      });
-  }
+  ngOnInit(): void { }
 
   getClima() {
     const ciudad = this.formCiudad.value;

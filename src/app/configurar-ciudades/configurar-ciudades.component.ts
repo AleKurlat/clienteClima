@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CiudadesService } from '../ciudades.service';
 import { TipoCiudad } from '../tipos';
@@ -9,27 +9,18 @@ import { TipoCiudad } from '../tipos';
   styleUrls: ['./configurar-ciudades.component.css']
 })
 export class ConfigurarCiudadesComponent implements OnInit {
-  ciudades?: Array<TipoCiudad>;
+  @Input() ciudades?: Array<TipoCiudad>;
   formNombre = new FormControl('');
 
   constructor(private ciudadesService: CiudadesService) { }
 
-  ngOnInit(): void {
-    this.getCiudades();
-  }
-
-  getCiudades() {
-    this.ciudadesService.getCiudades()
-      .subscribe((ciudades: Array<TipoCiudad>) => {
-        this.ciudades = ciudades;
-      });
-  }
+  ngOnInit(): void { }
 
   borrarCiudad(id: number) {
     this.ciudadesService.borrarCiudad(id)
       .subscribe(() => {
         console.log(id + " borrado correctamente");
-        this.getCiudades()
+        //this.getCiudades()
       });
   }
 
@@ -38,7 +29,7 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
         console.log(ciudad + " agregada correctamente");
-        this.getCiudades()
+        //this.getCiudades()
       });
   }
 
