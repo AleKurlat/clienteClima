@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from './../environments/environment';
-import { TipoClima, TipoHistorial } from './tipos'
+import { RespuestaApi } from './tipos'
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class ClimaService {
   getClima(reqBody: {
     "ciudad": string,
     "cantFilasHistorial": number
-  }): Observable<TipoHistorial> {
-    return this.http.post<TipoHistorial>
+  }): Observable<RespuestaApi> {
+    return this.http.post<RespuestaApi>
       (this.url, reqBody)
   }
 }

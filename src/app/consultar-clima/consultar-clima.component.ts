@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ClimaService } from '../clima.service';
 import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
-import { TipoClima, TipoHistorial, TipoCiudades } from '../tipos';
+import { TipoClima, TipoHistorial, TipoCiudades, RespuestaApi } from '../tipos';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -15,10 +15,10 @@ export class ConsultarClimaComponent implements OnInit {
   title = 'consultar-clima';
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
-  cantFilas = new FormControl(10);
+  formCantFilas = new FormControl(10);
   ciudades?: TipoCiudades;
   clima?: TipoClima;
-  historial?: TipoHistorial;
+  historial?: TipoHistorial | null;
   isLoading = false;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
@@ -42,24 +42,23 @@ export class ConsultarClimaComponent implements OnInit {
       return
     }
     if (cantFilas < 1) {
-      Swal.fire("La cantidad de registros consultados no puede ser menor a 1")
-      return
+      cantFilas = 10
+      this.formCantFilas.setValue(10);
     }
+    // construyo un objeto que voy a utilizar para la petición a la API
     const reqBody = {
       "ciudad": ciudad,
       "cantFilasHistorial": hayHistorial ? cantFilas : 0 // si la casilla tiene check entonces devuelve la cantidad de registros que marca el input, sino no devuelve historial 
     }
     this.isLoading = true;
-    this.climaService.getClima(reqBody)
-      .subscribe((clima: TipoHistorial) => {
-        // si se solicitó historial, se muestra en primer lugar la consulta recién realizada
-        if (hayHistorial) {
-          this.clima = clima[0].registro;
-          this.historial = clima;
-        } else {
-          this.clima = clima;
-        }
+
+    this.climaService.getClima(reqBody).subscribe(
+      (respuestaApi: RespuestaApi) => {
+        this.clima = respuestaApi.actual; // si no se solicitó historial, lo que vuelve es directamente el objeto con los datos del clima
+        this.historial = respuestaApi.registros;
+        console.log(respuestaApi)
         this.isLoading = false;
-      });
+      }
+    );
   }
 }

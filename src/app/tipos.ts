@@ -1,5 +1,17 @@
 export interface TipoClima {
-    [key: string]: any
+    name: string;
+    main: {
+        temp: number;
+        feels_like: number;
+    };
+    sys: {
+        country: string
+    }
+}
+
+export interface RespuestaApi {
+    actual: TipoClima,
+    registros: TipoHistorial | null
 }
 
 export type TipoCiudades = Array<{
