@@ -27,9 +27,11 @@ export class ConsultarClimaComponent implements OnInit {
   }
 
   traerCiudades() {
+    this.isLoading = true;
     this.ciudadesService.traerCiudades()
       .subscribe((ciudades: Array<TipoCiudad>) => {
         this.ciudades = ciudades;
+        this.isLoading = false;
       });
   }
 

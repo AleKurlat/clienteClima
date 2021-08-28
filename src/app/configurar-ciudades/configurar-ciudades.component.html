@@ -7,6 +7,10 @@
         <button type="button" class="btn btn-primary" (click)="agregarCiudad(formNombre.value)">Agregar ciudad</button>
     </form>
 
+    <div *ngIf="isLoading">
+        <img class="loader" src="assets/img/loading.svg">
+    </div>
+
     <div *ngIf="ciudades">
         <tr *ngFor="let ciudad of ciudades">
             <td>{{ciudad.ciudad}}</td>
