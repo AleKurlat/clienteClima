@@ -8,9 +8,10 @@
     </form>
 
     <div *ngIf="ciudades">
-        <div *ngFor="let ciudad of ciudades">
-            {{ciudad.ciudad}}
-            <button class="btn btn-primary" type="button" (click)="borrarCiudad(ciudad.id)">Borrar ciudad</button>
-        </div>
+        <tr *ngFor="let ciudad of ciudades">
+            <td>{{ciudad.ciudad}}</td>
+            <td><button class="btn btn-primary" type="button" (click)="borrarCiudad(ciudad.id)">Borrar
+                    ciudad</button></td>
+        </tr>
     </div>
 </div>
