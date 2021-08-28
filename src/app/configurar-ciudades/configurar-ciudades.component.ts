@@ -28,6 +28,15 @@ export class ConfigurarCiudadesComponent implements OnInit {
   }
 
   agregarCiudad(ciudad: string) {
+    if (!ciudad) {
+      alert("Debe seleccionar una ciudad")
+      return
+    }
+    const repetida = this.ciudades?.find((elem) => elem.ciudad === ciudad.toUpperCase())
+    if (repetida) {
+      alert("Esta ciudad ya fue ingresada previamente")
+      return
+    }
     const reqBody = { "ciudad": ciudad }
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
