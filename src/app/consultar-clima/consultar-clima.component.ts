@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ClimaService } from '../clima.service';
 import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
-import { TipoClima, TipoCiudad, TipoHistorial } from '../tipos';
+import { TipoClima, TipoHistorial, TipoCiudades } from '../tipos';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -16,9 +16,9 @@ export class ConsultarClimaComponent implements OnInit {
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
   cantFilas = new FormControl(10);
-  ciudades?: Array<TipoCiudad>;
+  ciudades?: TipoCiudades;
   clima?: TipoClima;
-  historial?: TipoHistorial | null;
+  historial?: TipoHistorial;
   isLoading = false;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
@@ -30,7 +30,7 @@ export class ConsultarClimaComponent implements OnInit {
   traerCiudades() {
     this.isLoading = true;
     this.ciudadesService.traerCiudades()
-      .subscribe((ciudades: Array<TipoCiudad>) => {
+      .subscribe((ciudades: TipoCiudades) => {
         this.ciudades = ciudades;
         this.isLoading = false;
       });
@@ -51,9 +51,14 @@ export class ConsultarClimaComponent implements OnInit {
     }
     this.isLoading = true;
     this.climaService.getClima(reqBody)
-      .subscribe((clima: any) => {
-        this.clima = hayHistorial ? clima[0].registro : clima; // si se solicitó historial, se muestra en primer lugar la consulta recién realizada
-        this.historial = hayHistorial ? clima : null;
+      .subscribe((clima: TipoHistorial) => {
+        // si se solicitó historial, se muestra en primer lugar la consulta recién realizada
+        if (hayHistorial) {
+          this.clima = clima[0].registro;
+          this.historial = clima;
+        } else {
+          this.clima = clima;
+        }
         this.isLoading = false;
       });
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from './../environments/environment';
-import { TipoCiudades, TipoCiudad, TipoClima } from './tipos';
+import { TipoCiudades } from './tipos';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,12 @@ export class CiudadesService {
 
   constructor(private http: HttpClient,) { }
 
-  //chequear tipo
-  traerCiudades(): Observable<any> {
-    return this.http.get
+  traerCiudades(): Observable<TipoCiudades> {
+    return this.http.get<TipoCiudades>
       (this.url)
   }
 
-  agregarCiudad(reqBody: object) {
+  agregarCiudad(reqBody: { "ciudad": string }) {
     return this.http.post
       (this.url, reqBody)
   }

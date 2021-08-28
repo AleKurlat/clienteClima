@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CiudadesService } from '../ciudades.service';
-import { TipoCiudad } from '../tipos';
+import { TipoCiudades } from '../tipos';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./configurar-ciudades.component.css']
 })
 export class ConfigurarCiudadesComponent implements OnInit {
-  ciudades?: Array<TipoCiudad>;
+  ciudades?: TipoCiudades;
   formNombre = new FormControl('');
   isLoading = false;
 
@@ -51,10 +51,9 @@ export class ConfigurarCiudadesComponent implements OnInit {
   traerCiudades() {
     this.isLoading = true;
     this.ciudadesService.traerCiudades()
-      .subscribe((ciudades: Array<TipoCiudad>) => {
+      .subscribe((ciudades: TipoCiudades) => {
         this.ciudades = ciudades;
         this.isLoading = false;
       });
   }
-
 }

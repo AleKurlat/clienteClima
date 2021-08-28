@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from './../environments/environment';
-import { TipoClima } from './tipos'
+import { TipoClima, TipoHistorial } from './tipos'
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,11 @@ export class ClimaService {
 
   constructor(private http: HttpClient,) { }
 
-  getClima(reqBody: object): Observable<TipoClima> {
-    return this.http.post
+  getClima(reqBody: {
+    "ciudad": string,
+    "cantFilasHistorial": number
+  }): Observable<TipoHistorial> {
+    return this.http.post<TipoHistorial>
       (this.url, reqBody)
   }
-
 }
