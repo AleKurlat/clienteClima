@@ -14,14 +14,23 @@ export class ConsultarClimaComponent implements OnInit {
   title = 'consultar-clima';
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
-  @Input() ciudades?: Array<TipoCiudad>;
+  ciudades?: Array<TipoCiudad>;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
   isLoading = false;
 
   constructor(private climaService: ClimaService, private ciudadesService: CiudadesService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.traerCiudades();
+  }
+
+  traerCiudades() {
+    this.ciudadesService.traerCiudades()
+      .subscribe((ciudades: Array<TipoCiudad>) => {
+        this.ciudades = ciudades;
+      });
+  }
 
   getClima() {
     const ciudad = this.formCiudad.value;

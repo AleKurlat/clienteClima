@@ -15,12 +15,14 @@ export class ConfigurarCiudadesComponent implements OnInit {
 
   constructor(private ciudadesService: CiudadesService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.traerCiudades()
+  }
 
   borrarCiudad(id: number) {
     this.ciudadesService.borrarCiudad(id)
       .subscribe(() => {
-        this.actualizarCiudades.emit();
+        this.traerCiudades()
         console.log(id + " borrado correctamente")
       });
   }
@@ -29,11 +31,16 @@ export class ConfigurarCiudadesComponent implements OnInit {
     const reqBody = { "ciudad": ciudad }
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
-        this.actualizarCiudades.emit();
+        this.traerCiudades()
         console.log(ciudad + " agregada correctamente")
       });
   }
 
-
+  traerCiudades() {
+    this.ciudadesService.traerCiudades()
+      .subscribe((ciudades: Array<TipoCiudad>) => {
+        this.ciudades = ciudades;
+      });
+  }
 
 }

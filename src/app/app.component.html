@@ -1,7 +1,12 @@
 <div class="contenedor">
     <h1>Consulta de clima</h1>
-    <button class="btn btn-primary" type="button" (click)="toggleConfigurar()">Configurar ciudades</button>
-    <app-configurar-ciudades *ngIf="panelConfigurar" [ciudades]="ciudades" (actualizarCiudades)="traerCiudades()">
-    </app-configurar-ciudades>
-    <app-consultar-clima *ngIf="ciudades" [ciudades]="ciudades"></app-consultar-clima>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/consultar-clima" routerLinkActive="active">Consultar clima</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/configurar-ciudades" routerLinkActive="active">Configurar ciudades</a>
+        </li>
+    </ul>
+    <router-outlet></router-outlet>
 </div>

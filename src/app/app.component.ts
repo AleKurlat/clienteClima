@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { CiudadesService } from './ciudades.service';
-import { TipoCiudad } from './tipos';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +8,9 @@ import { TipoCiudad } from './tipos';
 
 export class AppComponent {
   title = 'consultar-clima';
-  ciudades?: Array<TipoCiudad>;
-  panelConfigurar = false;
 
-  constructor(private ciudadesService: CiudadesService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.traerCiudades();
-  }
-
-  toggleConfigurar() {
-    this.panelConfigurar = !this.panelConfigurar
-  }
-
-  traerCiudades() {
-    this.ciudadesService.traerCiudades()
-      .subscribe((ciudades: Array<TipoCiudad>) => {
-        this.ciudades = ciudades;
-      });
   }
 }

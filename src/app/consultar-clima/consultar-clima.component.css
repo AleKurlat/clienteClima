@@ -1,4 +1,9 @@
 .consultar-clima{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    padding: 30px;
+    margin: 10px;
     width: 800px;
 }
 

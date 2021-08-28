@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ConfigurarCiudadesComponent } from './configurar-ciudades/configurar-ciudades.component';
 import { ConsultarClimaComponent } from './consultar-clima/consultar-clima.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
