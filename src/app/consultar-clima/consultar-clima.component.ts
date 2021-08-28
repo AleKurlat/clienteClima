@@ -14,6 +14,7 @@ export class ConsultarClimaComponent implements OnInit {
   title = 'consultar-clima';
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
+  cantFilas = new FormControl(10);
   ciudades?: Array<TipoCiudad>;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
@@ -34,8 +35,12 @@ export class ConsultarClimaComponent implements OnInit {
 
   getClima() {
     const ciudad = this.formCiudad.value;
+    if (!ciudad) {
+      alert("Debe seleccionar una ciudad")
+      return
+    }
     const hayHistorial = this.checkHistorial.value
-    const cantFilasHistorial = hayHistorial ? 10 : 0; // si la casilla tiene check entonces devuelve 10 registros, sino no devuelve historial 
+    const cantFilasHistorial = hayHistorial ? this.cantFilas.value : 0; // si la casilla tiene check entonces devuelve la cantidad de registros que marca el input, sino no devuelve historial 
     const reqBody = { "ciudad": ciudad, "cantFilasHistorial": cantFilasHistorial }
     this.isLoading = true;
     this.climaService.getClima(reqBody)

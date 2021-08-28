@@ -10,6 +10,11 @@
             <label for="historial">Incluir histórico</label>
         </span>
 
+        <span *ngIf="checkHistorial.value">
+            <label for="cantFilas">n° de filas a consultar</label>
+            <input type="number" name="cantFilas" id="cantFilas" [formControl]="cantFilas">
+        </span>
+
         <button class="btn btn-primary" type="button" (click)="getClima()">Consultar</button>
     </form>
     <div *ngIf="isLoading">
