@@ -54,9 +54,8 @@ export class ConsultarClimaComponent implements OnInit {
 
     this.climaService.getClima(reqBody).subscribe(
       (respuestaApi: RespuestaApi) => {
-        this.clima = respuestaApi.actual; // si no se solicitó historial, lo que vuelve es directamente el objeto con los datos del clima
-        this.historial = respuestaApi.registros;
-        console.log(respuestaApi)
+        this.clima = respuestaApi.actual;
+        this.historial = respuestaApi.registros; // si no se solicitó historial, volverá nulo
         this.isLoading = false;
       }
     );
