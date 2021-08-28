@@ -11,7 +11,7 @@
         </span>
 
         <span *ngIf="checkHistorial.value">
-            <label for="cantFilas">n° de filas a consultar</label>
+            <label for="cantFilas">Registros a consultar</label>
             <input type="number" name="cantFilas" id="cantFilas" [formControl]="cantFilas">
         </span>
 
@@ -21,8 +21,16 @@
         <img class="loader" src="assets/img/loading.svg">
     </div>
     <div class="panelInformacion" *ngIf="clima">
-        <div>Ciudad: {{clima.name}}, {{clima.sys.country}}</div>
-        <div> Temperatura: {{ clima.main.temp }} Sensación térmica: {{ clima.main.feels_like }}</div>
+
+        <div> <strong>Ciudad: </strong>{{clima.name}}, {{clima.sys.country}}</div>
+        <div>
+            <span>
+                <strong>Temperatura: </strong>{{ clima.main.temp }}
+            </span>
+            <span class="ml-2">
+                <strong>Sensación térmica: </strong>{{ clima.main.feels_like }}
+            </span>
+        </div>
     </div>
 
     <table class="table table-striped" *ngIf="historial">
