@@ -12,10 +12,11 @@
 
         <span *ngIf="checkHistorial.value">
             <label for="cantFilas">Registros a consultar</label>
-            <input type="number" name="cantFilas" id="cantFilas" [formControl]="cantFilas">
+            <input type="number" min="1" name="cantFilas" id="cantFilas" [formControl]="cantFilas">
         </span>
 
-        <button class="btn btn-primary" type="button" (click)="getClima()">Consultar</button>
+        <button class="btn btn-primary" type="button"
+            (click)="getClima(formCiudad.value, checkHistorial.value, cantFilas.value)">Consultar</button>
     </form>
     <div *ngIf="isLoading">
         <img class="loader" src="assets/img/loading.svg">

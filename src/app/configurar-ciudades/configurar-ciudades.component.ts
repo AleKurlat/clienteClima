@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CiudadesService } from '../ciudades.service';
 import { TipoCiudad } from '../tipos';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-configurar-ciudades',
@@ -24,14 +25,13 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.ciudadesService.borrarCiudad(id)
       .subscribe(() => {
         this.traerCiudades()
-        console.log(id + " borrado correctamente")
         this.isLoading = false;
       });
   }
 
   agregarCiudad(ciudad: string) {
     if (!ciudad) {
-      alert("Debe seleccionar una ciudad")
+      Swal.fire("Debe ingresar una ciudad")
       return
     }
     const repetida = this.ciudades?.find((elem) => elem.ciudad === ciudad.toUpperCase())
@@ -44,7 +44,6 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
         this.traerCiudades()
-        console.log(ciudad + " agregada correctamente")
         this.isLoading = false;
       });
   }

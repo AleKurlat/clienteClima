@@ -3,6 +3,7 @@ import { ClimaService } from '../clima.service';
 import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
 import { TipoClima, TipoCiudad, TipoHistorial } from '../tipos';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-consultar-clima',
@@ -35,15 +36,19 @@ export class ConsultarClimaComponent implements OnInit {
       });
   }
 
-  getClima() {
-    const ciudad = this.formCiudad.value;
+  getClima(ciudad: string, hayHistorial: boolean, cantFilas: number) {
     if (!ciudad) {
-      alert("Debe seleccionar una ciudad")
+      Swal.fire("Debe seleccionar una ciudad")
       return
     }
-    const hayHistorial = this.checkHistorial.value
-    const cantFilasHistorial = hayHistorial ? this.cantFilas.value : 0; // si la casilla tiene check entonces devuelve la cantidad de registros que marca el input, sino no devuelve historial 
-    const reqBody = { "ciudad": ciudad, "cantFilasHistorial": cantFilasHistorial }
+    if (cantFilas < 1) {
+      Swal.fire("La cantidad de registros consultados no puede ser menor a 1")
+      return
+    }
+    const reqBody = {
+      "ciudad": ciudad,
+      "cantFilasHistorial": hayHistorial ? cantFilas : 0 // si la casilla tiene check entonces devuelve la cantidad de registros que marca el input, sino no devuelve historial 
+    }
     this.isLoading = true;
     this.climaService.getClima(reqBody)
       .subscribe((clima: any) => {
@@ -52,6 +57,4 @@ export class ConsultarClimaComponent implements OnInit {
         this.isLoading = false;
       });
   }
-
-
 }
