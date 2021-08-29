@@ -16,7 +16,7 @@ export class ConsultarClimaComponent implements OnInit {
   checkHistorial = new FormControl(false);
   formCiudad = new FormControl();
   formCantFilas = new FormControl(10);
-  ciudades?: TipoCiudades;
+  ciudades?: TipoCiudades | null;
   clima?: TipoClima;
   historial?: TipoHistorial | null;
   isLoading = false;
@@ -30,9 +30,14 @@ export class ConsultarClimaComponent implements OnInit {
   traerCiudades() {
     this.isLoading = true;
     this.ciudadesService.traerCiudades()
-      .subscribe((ciudades: TipoCiudades) => {
-        this.ciudades = ciudades;
-        this.isLoading = false;
+      .subscribe(
+        (ciudades: TipoCiudades) => {
+          this.ciudades = ciudades; // si petición sale ok, asigna resultado a propiedad "ciudades"
+        },
+        () => this.ciudades = null //callback en caso de error, indica que falló carga de ciudades para que el template sepa que tiene que mostrar ese mensaje
+      )
+      .add(() => {
+        this.isLoading = false; //callback de finalizacion, independientemente de como haya salido la petición
       });
   }
 
@@ -54,10 +59,11 @@ export class ConsultarClimaComponent implements OnInit {
 
     this.climaService.getClima(reqBody).subscribe(
       (respuestaApi: RespuestaApi) => {
-        this.clima = respuestaApi.actual;
+        this.clima = respuestaApi.actual; // si petición sale ok, asigna resultado a propiedad "clima"
         this.historial = respuestaApi.registros; // si no se solicitó historial, volverá nulo
-        this.isLoading = false;
       }
-    );
+    ).add(() => {
+      this.isLoading = false; //callback de finalizacion, independientemente de como haya salido la petición
+    });;
   }
 }

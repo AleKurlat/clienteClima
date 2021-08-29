@@ -18,6 +18,10 @@
         <button class="btn btn-primary" type="button"
             (click)="getClima(formCiudad.value, checkHistorial.value, formCantFilas.value)">Consultar</button>
     </form>
+    <div *ngIf="ciudades?.length===0">Debe agregar ciudades en la pestaña "configurar ciudades" para poder consultar sus
+        datos de temperatura</div>
+    <div *ngIf="ciudades === undefined">Esperando datos del servidor</div>
+    <div *ngIf="ciudades === null">No fue posible obtener datos del servidor</div>
     <div *ngIf="isLoading">
         <img class="loader" src="assets/img/loading.svg">
     </div>

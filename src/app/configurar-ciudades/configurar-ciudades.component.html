@@ -1,5 +1,5 @@
 <div class="contenedor-configurar">
-    <form class="formConsultar">
+    <form *ngIf="ciudades" class="formConsultar">
         <span>
             <label for="ciudad">Ciudad:</label>
             <input type="text" id="ciudad" placeholder="Nombre de ciudad" [formControl]="formNombre">
@@ -18,4 +18,6 @@
                     ciudad</button></td>
         </tr>
     </div>
+    <div *ngIf="ciudades === undefined">Esperando datos del servidor</div>
+    <div *ngIf="ciudades === null">No fue posible obtener datos del servidor</div>
 </div>

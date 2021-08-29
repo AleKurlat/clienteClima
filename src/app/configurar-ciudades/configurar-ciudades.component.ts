@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./configurar-ciudades.component.css']
 })
 export class ConfigurarCiudadesComponent implements OnInit {
-  ciudades?: TipoCiudades;
+  ciudades?: TipoCiudades | null;
   formNombre = new FormControl('');
   isLoading = false;
 
@@ -24,8 +24,10 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.isLoading = true;
     this.ciudadesService.borrarCiudad(id)
       .subscribe(() => {
-        this.traerCiudades()
-        this.isLoading = false;
+        this.traerCiudades() // vuelvo a traer listado luego de modificar la base de datos
+      })
+      .add(() => {
+        this.isLoading = false; //callback de finalizacion, independientemente de como haya salido la petición
       });
   }
 
@@ -44,7 +46,9 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.ciudadesService.agregarCiudad(reqBody)
       .subscribe(() => {
         this.traerCiudades()
-        this.isLoading = false;
+      })
+      .add(() => {
+        this.isLoading = false; //callback de finalizacion, independientemente de como haya salido la petición
       });
   }
 
@@ -53,7 +57,11 @@ export class ConfigurarCiudadesComponent implements OnInit {
     this.ciudadesService.traerCiudades()
       .subscribe((ciudades: TipoCiudades) => {
         this.ciudades = ciudades;
-        this.isLoading = false;
+      },
+        () => this.ciudades = null //callback en caso de error, indica que falló carga de ciudades para que el template sepa que tiene que mostrar ese mensaje
+      )
+      .add(() => {
+        this.isLoading = false; //callback de finalizacion, independientemente de como haya salido la petición
       });
   }
 }
