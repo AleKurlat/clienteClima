@@ -38,7 +38,7 @@ export class ConfigurarCiudadesComponent implements OnInit {
     }
     const repetida = this.ciudades?.find((elem) => elem.ciudad === ciudad.toUpperCase())
     if (repetida) {
-      alert("Esta ciudad ya fue ingresada previamente")
+      Swal.fire("Esta ciudad ya fue ingresada previamente")
       return
     }
     this.isLoading = true;
