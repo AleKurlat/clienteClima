@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
 import { environment } from './../environments/environment';
 import { RespuestaApi } from './tipos'
 import Swal from 'sweetalert2'
@@ -29,9 +29,16 @@ export class ClimaService {
     "ciudad": string,
     "cantFilasHistorial": number
   }): Observable<RespuestaApi> {
-    return this.http.post<RespuestaApi>
+    return this.http.post<any>
       (this.url, reqBody)
       .pipe(
+        map((respuesta) => {
+          const registros = respuesta.registros?.map((filaHistorial: any) => {
+            return { ...filaHistorial, registro: JSON.parse(filaHistorial.registro) } // parseo a objeto el registro que viene de la base de datos, que está en formato string
+          })
+          const nuevaRespuesta = { ...respuesta, registros }
+          return nuevaRespuesta
+        }),
         catchError(this.handleError)
       );
   }
