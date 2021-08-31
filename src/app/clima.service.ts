@@ -29,15 +29,19 @@ export class ClimaService {
     "ciudad": string,
     "cantFilasHistorial": number
   }): Observable<RespuestaApiMapeada> {
-    return this.http.post<any>
+    return this.http.post<RespuestaApi>
       (this.url, reqBody)
       .pipe(
         map((respuesta) => {
-          const registros = respuesta.registros?.map(
-            (filaHistorial: { registro: string }) => {
-              return { ...filaHistorial, registro: JSON.parse(filaHistorial.registro) } // parseo a objeto el registro que viene de la base de datos, que está en formato string
-            })
-          return { ...respuesta, registros }
+          if (respuesta.registros === null) {
+            return { ...respuesta, registros: null } // si no hay historial incluido en la respuesta, la devuelvo tal como vino (la aclaración registros:null es un requisito de TypeScript)
+          } else { // si la respuesta viene con historial, tengo que transformar los registros porque vienen de la base de datos en formato string
+            const registros = respuesta.registros.map(
+              (filaHistorial) => {
+                return { ...filaHistorial, registro: JSON.parse(filaHistorial.registro) }
+              })
+            return { ...respuesta, registros }
+          }
         }),
         catchError(this.handleError)
       );
