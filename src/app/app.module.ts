@@ -9,12 +9,14 @@ import { ConfigurarCiudadesComponent } from './configurar-ciudades/configurar-ci
 import { ConsultarClimaComponent } from './consultar-clima/consultar-clima.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import { PaginaNoEncontradaComponent } from './pagina-no-encontrada/pagina-no-encontrada.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfigurarCiudadesComponent,
-    ConsultarClimaComponent
+    ConsultarClimaComponent,
+    PaginaNoEncontradaComponent
   ],
   imports: [
     BrowserModule,
