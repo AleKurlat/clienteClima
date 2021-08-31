@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from './../environments/environment';
 import { TipoCiudades } from './tipos';
 import Swal from 'sweetalert2'
