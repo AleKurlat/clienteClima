@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from './../environments/environment';
 import { RespuestaApi, RespuestaApiMapeada } from './tipos'
@@ -28,9 +28,7 @@ export class ClimaService {
   getClima(reqBody: {
     "ciudad": string,
     "cantFilasHistorial": number
-  })
-  //: Observable<RespuestaApiMapeada> 
-  {
+  }): Observable<RespuestaApiMapeada> {
     return this.http.post<any>
       (this.url, reqBody)
       .pipe(
