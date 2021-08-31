@@ -22,15 +22,6 @@ export type TipoHistorial = Array<{
 
 export interface RespuestaApi {
     actual: TipoClima,
-    registros: Array<{
-        id: number;
-        registro: string;
-        ciudad: string;
-    }> | null
-}
-
-export interface RespuestaApiMapeada {
-    actual: TipoClima,
     registros: TipoHistorial | null
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClimaService } from '../clima.service';
 import { CiudadesService } from '../ciudades.service';
 import { FormControl } from '@angular/forms';
-import { TipoClima, TipoHistorial, TipoCiudades, RespuestaApiMapeada } from '../tipos';
+import { TipoClima, TipoHistorial, TipoCiudades, RespuestaApi } from '../tipos';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -58,7 +58,7 @@ export class ConsultarClimaComponent implements OnInit {
     this.isLoading = true;
 
     this.climaService.getClima(reqBody).subscribe(
-      (respuestaApi: RespuestaApiMapeada) => {
+      (respuestaApi: RespuestaApi) => {
         this.clima = respuestaApi.actual; // si petición sale ok, asigna resultado a propiedad "clima"
         this.historial = respuestaApi.registros; // si no se solicitó historial, volverá nulo
       }
